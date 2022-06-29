@@ -143,7 +143,7 @@ small {
 					<div class="col">
 						<div class="card shadow-sm">
 							<img src="imagenes/login_Calidad.png">
-							<h3>Calidad de Estudiantessssssssssss</h3>
+							<h3>Calidad de Estudiantes</h3>
 							<small class="text-muted">Característica</small>
 							<div class="card-body">
 								<p class="card-text">This is a wider card with supporting
