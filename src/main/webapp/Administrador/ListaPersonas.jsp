@@ -36,8 +36,11 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
@@ -112,20 +115,23 @@ body {
 					</div>
 				</header>
 
+				<div class="container" style="margin-top: 10px; padding: 5px">
+					<table id="tablax" class="table table-striped table-bordered"
+						style="width: 100%">
 
-				<table class="table table-striped">
-					<thead>
-						<tr>
 
-							<th scope="col">Nombres</th>
-							<th scope="col">Apellidos</th>
-							<th scope="col">Correo</th>
-							<th scope="col">Modificar</th>
-						</tr>
-					</thead>
-					<tbody>
+						<thead>
+							<tr>
 
-						<%
+								<th scope="col">Nombres</th>
+								<th scope="col">Apellidos</th>
+								<th scope="col">Correo</th>
+								<th scope="col">Modificar</th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<%
 						listapersonas = daosPersona.mostrarPersonas();
 						for (int i = 0; i < listapersonas.size(); i++) {
 							persona = (Persona) listapersonas.get(i);
@@ -139,16 +145,59 @@ body {
 							out.println("<td>" + apellido_Persona);
 							out.println("<td>" + correo + "</td>");
 						%><td><a
-							href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=id_Persona%>"
-							<button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
-						<%
+								href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=id_Persona%>"
+								<button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
+							<%
 						out.println("</tr>");
 						}
 						%>
 
 
-					</tbody>
-				</table>
+						</tbody>
+
+					</table>
+				</div>
+ <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+    </script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Ver&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                scrollY: 400,
+                lengthMenu: [ [10, 30, -1], [10, 25, "All"] ],
+            });
+        });
+    </script>
+
 
 			</div>
 		</div>

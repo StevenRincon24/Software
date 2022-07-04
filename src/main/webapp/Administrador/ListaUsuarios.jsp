@@ -38,6 +38,11 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 </head>
 
 
@@ -112,47 +117,103 @@ body {
 					</div>
 				</header>
 
+				<div class="container" style="margin-top: 10px; padding: 5px">
+					<table id="tablax" class="table table-striped table-bordered"
+						style="width: 100%">
+						<thead>
+							<tr>
 
-				<table class="table table-striped">
-					<thead>
-						<tr>
+								<th scope="col">Usuario</th>
+								<th scope="col">Rol</th>
+								<th scope="col">Nombres Usuario</th>
+								<th scope="col">Modifsaasicar</th>
 
-							<th scope="col">Usuario</th>
-							<th scope="col">Rol</th>
-							<th scope="col">Nombres Usuario</th>
-							<th scope="col">Modificar</th>
-							
-						</tr>
-					</thead>
-					<tbody>
+							</tr>
+						</thead>
+						<tbody>
 
-						<%
-						listausuarios = daosUsuario.mostrarUsuarios();
-						for (int i = 0; i < listausuarios.size(); i++) {
-							usuario = (Usuario) listausuarios.get(i);
-							int id_usuario = usuario.getId_Usuario();
-							String nombre_Usuario = usuario.getNombre_Usuario();
-							String rol_persona = usuario.getRol();
-							String nombre = usuario.getNombre_Persona();
-							String apellido = usuario.getApellido_Persona();
+							<%
+							listausuarios = daosUsuario.mostrarUsuarios();
+							for (int i = 0; i < listausuarios.size(); i++) {
+								usuario = (Usuario) listausuarios.get(i);
+								int id_usuario = usuario.getId_Usuario();
+								String nombre_Usuario = usuario.getNombre_Usuario();
+								String rol_persona = usuario.getRol();
+								String nombre = usuario.getNombre_Persona();
+								String apellido = usuario.getApellido_Persona();
 
-							out.println("<tr>");
-							out.println("<td>" + nombre_Usuario);
-							out.println("<td>" + nombre + " " + apellido);
-							out.println("<td>" + rol_persona+ "</td>");
-							
-						%><td><a
-							href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=id_usuario%>"
-							<button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
-						<%
-						out.println("</tr>");
-						}
-						%>
+								out.println("<tr>");
+								out.println("<td>" + nombre_Usuario);
+								out.println("<td>" + nombre + " " + apellido);
+								out.println("<td>" + rol_persona + "</td>");
+							%><td><a
+								href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=id_usuario%>"
+								<button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
+							<%
+							out.println("</tr>");
+							}
+							%>
 
 
-					</tbody>
-				</table>
+						</tbody>
+					</table>
 
+				</div>
+
+				<!-- JQUERY -->
+				<script src="https://code.jquery.com/jquery-3.4.1.js"
+					integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+					crossorigin="anonymous">
+					
+				</script>
+				<!-- DATATABLES -->
+				<script
+					src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+					
+				</script>
+				<!-- BOOTSTRAP -->
+				<script
+					src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+					
+				</script>
+				<script>
+					$(document)
+							.ready(
+									function() {
+										$('#tablax')
+												.DataTable(
+														{
+															language : {
+																processing : "Tratamiento en curso...",
+																search : "Ver&nbsp;:",
+																lengthMenu : "Agrupar de _MENU_ items",
+																info : "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+																infoEmpty : "No existen datos.",
+																infoFiltered : "(filtrado de _MAX_ elementos en total)",
+																infoPostFix : "",
+																loadingRecords : "Cargando...",
+																zeroRecords : "No se encontraron datos con tu busqueda",
+																emptyTable : "No hay datos disponibles en la tabla.",
+																paginate : {
+																	first : "Primero",
+																	previous : "Anterior",
+																	next : "Siguiente",
+																	last : "Ultimo"
+																},
+																aria : {
+																	sortAscending : ": active para ordenar la columna en orden ascendente",
+																	sortDescending : ": active para ordenar la columna en orden descendente"
+																}
+															},
+															scrollY : 400,
+															lengthMenu : [
+																	[ 10, 30,
+																			-1 ],
+																	[ 10, 25,
+																			"All" ] ],
+														});
+									});
+				</script>
 			</div>
 		</div>
 	</div>

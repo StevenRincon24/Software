@@ -35,6 +35,9 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 
 <!-- Bootstrap core CSS -->
 <link href="../assets/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
 
 <style>
 .bd-placeholder-img {
@@ -59,6 +62,11 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 
 <!-- Custom styles for this template -->
 <link href="../carousel/carousel.rtl.css" rel="stylesheet">
+<script>
+$(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script> 
 </head>
 <body>
 	<header>
@@ -107,5 +115,6 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 		</nav>
 	</header>
 	<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 </body>
 </html>
