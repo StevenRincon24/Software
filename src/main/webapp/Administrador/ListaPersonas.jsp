@@ -35,6 +35,9 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 <link href="../assets/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
@@ -94,17 +97,8 @@ body {
 									</svg>
 									Lista de personas
 								</button>
-							</a> <a ><button
-									type="button" class="btn btn-outline-warning" disabled>
-									<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
-										fill="currentColor" class="bi bi-person-plus-fill"
-										viewBox="0 0 16 16"> <path
-											d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-  										<path fill-rule="evenodd"
-											d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
-									</svg>
-									Asignar usuario
-								</button> </a> <a href="../Administrador/ListaUsuarios.jsp"><button type="button" class="btn btn-secondary">
+							</a> <a href="../Administrador/ListaUsuarios.jsp"><button
+									type="button" class="btn btn-secondary">
 									<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
 										fill="currentColor" class="bi bi-list-stars"
 										viewBox="0 0 16 16"> <path fill-rule="evenodd"
@@ -118,95 +112,51 @@ body {
 					</div>
 				</header>
 
-				<form class="needs-validation" novalidate method="post"
-					action="../Agregar/ProcesarAgregarUsuario.jsp">
-					<div class="row g-3">
-						<div class="col-auto">
-							<label for="username" class="form-label">Usuario</label>
-							<div class="input-group has-validation">
-								<input type="text" class="form-control" id="username"
-									placeholder="Usuario" name="username" value="" required><span
-									class="input-group-text">@uptc.edu.co</span>
-								<div class="invalid-feedback">¡Debe asignar un usuario!</div>
-							</div>
-						</div>
 
-						<div class="col-auto">
-							<label for="username" class="form-label">Contraseña</label> <input
-								type="password" class="form-control" id="inputPassword2"
-								placeholder="Password" value="" name="password" required>
-							<div class="invalid-feedback">¡Debe escribir la contraseña!</div>
-						</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+
+							<th scope="col">Nombres</th>
+							<th scope="col">Apellidos</th>
+							<th scope="col">Correo</th>
+							<th scope="col">Modificar</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<%
+						listapersonas = daosPersona.mostrarPersonas();
+						for (int i = 0; i < listapersonas.size(); i++) {
+							persona = (Persona) listapersonas.get(i);
+							int id_Persona = persona.getId_Persona();
+							String nombre_Persona = persona.getNombre_Persona();
+							String apellido_Persona = persona.getApellido_Persona();
+							String correo = persona.getEmail_Persona();
+
+							out.println("<tr>");
+							out.println("<td>" + nombre_Persona);
+							out.println("<td>" + apellido_Persona);
+							out.println("<td>" + correo + "</td>");
+						%><td><a
+							href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=id_Persona%>"
+							<button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
+						<%
+						out.println("</tr>");
+						}
+						%>
 
 
-						<div class="col-auto">
-							<label for="state" class="form-label">Rol</label> <select
-								class="form-select" name="rol" required>
-								<option value="" id="rol" name="rol">--Rol--</option>
-								<%
-								// Creamos un for para mostrar todos los programas
-								listarol = daosUsuario.mostrarRol();
-								for (Object listar : listarol) {
-									rol = (Rol) listar;
-									//Tomamos cada uno de los valores que nos devuelve la base de datos de la tabla programa-->
-									idRol = rol.getId_Rol();
-									nombreRol = rol.getNombre_Rol();
+					</tbody>
+				</table>
 
-									out.print("<option value=" + idRol + ">" + nombreRol + "</option>");
-								}
-								%>
-							</select>
-							<div class="invalid-feedback">¡Debe seleccionar un rol!</div>
-						</div>
-
-						<div class="col-auto">
-							<label for="state" class="form-label">Persona</label> <input
-								class="form-control" list="datalistOptions" id="exampleDataList"
-								placeholder="Escribe un nombre" name="persona" required>
-							<datalist id="datalistOptions">
-
-								<%
-								// Creamos un for para mostrar todos los programas
-								listapersonas = daosPersona.mostrarPersonas();
-								for (Object listar : listapersonas) {
-									persona = (Persona) listar;
-									//Tomamos cada uno de los valores que nos devuelve la base de datos de la tabla programa-->
-									emailPersona = persona.getEmail_Persona();
-									nombrePersona = persona.getNombre_Persona();
-									apellidoPersona = persona.getApellido_Persona();
-									String nombre = nombrePersona + " " + apellidoPersona;
-									out.print("<option value=" + emailPersona + ">" + nombre + "</option>");
-								}
-								%>
-							</datalist>
-
-							<div class="invalid-feedback">¡Debe seleccionars un
-								persona!</div>
-						</div>
-
-					</div>
-					<br>
-					<div class="row g-4">
-						<div class="col-8" id="botones">
-							<button type="submit" class="btn btn-warning"
-								style="color: #ffffff">Crear Usuario</button>
-						</div>
-
-						<div class="col-1" id="botones">
-							<button type="submit" class="btn btn-danger" id="botonCancelar">Cancelar</button>
-						</div>
-
-					</div>
-				</form>
 			</div>
 		</div>
 	</div>
 </body>
 <br>
 <br>
-<footer id="footer">
-	<img src="../imagenes/footer.png" width="100%">
-</footer>
+
 
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -214,4 +164,6 @@ body {
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
 <script src="../js/form-validation.js"></script>
+
+
 </html>

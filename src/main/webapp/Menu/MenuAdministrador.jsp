@@ -82,7 +82,7 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 								y estadísticas</a></li>
 
 						<li class="nav-item"><a class="nav-link"
-							href="../Administrador/CrearUsuario.jsp">Gestión usuario</a></li>
+							href="../Administrador/CrearPersona.jsp">Gestión usuario</a></li>
 
 						<li class="nav-item dropdown">
 							<%

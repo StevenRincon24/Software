@@ -77,8 +77,6 @@
 	<%
 		int id_Persona = daosPersona.idPersona(correo);
 		daosUsuario.agregarUsuario(usuario, password, rol, id_Persona);	
-	
-	
 	}
 	%>
 
