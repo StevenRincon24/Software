@@ -136,11 +136,50 @@ body {
 						<div class="col-sm-4">
 							<label for="username" class="form-label">Correo electronico</label>
 							<div class="input-group has-validation">
-								<input type="email" class="form-control" id="password" name="password"
-									placeholder="Contraseña" value="" required>
+								<input type="email" class="form-control" id="email" name="email"
+									placeholder="Correo" value="" required>
 								<div class="invalid-feedback">¡Debe ingresar un
 									correo!</div>
 							</div>
+						</div>
+						
+						
+						<div class="col-sm-4">
+							<label for="username" class="form-label">Usuario</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" id="username"
+									placeholder="Usuario" name="username" value="" required><span
+									class="input-group-text">@uptc.edu.co</span>
+								<div class="invalid-feedback">¡Debe asignar un usuario!</div>
+							</div>
+						</div>
+
+						<div class="col-sm-4">
+							<label for="username" class="form-label">Contraseña</label> <input
+								type="password" class="form-control" id="inputPassword2"
+								placeholder="Contraseña" value="" name="password" required>
+							<div class="invalid-feedback">¡Debe escribir la contraseña!</div>
+						</div>
+
+
+						<div class="col-sm-4">
+							<label for="state" class="form-label">Rol</label> <select
+								class="form-select" name="rol" required>
+								<option value="" id="rol" name="rol">--Rol--</option>
+								<%
+								// Creamos un for para mostrar todos los programas
+								listarol = daosUsuario.mostrarRol();
+								for (Object listar : listarol) {
+									rol = (Rol) listar;
+									//Tomamos cada uno de los valores que nos devuelve la base de datos de la tabla programa-->
+									idRol = rol.getId_Rol();
+									nombreRol = rol.getNombre_Rol();
+
+									out.print("<option value=" + idRol + ">" + nombreRol + "</option>");
+								}
+								%>
+							</select>
+							<div class="invalid-feedback">¡Debe seleccionar un rol!</div>
 						</div>
 
 						<div class="col-8" id="botones">

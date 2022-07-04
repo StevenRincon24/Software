@@ -23,6 +23,8 @@ public class Daos_Persona {
 
     public boolean agregarPersona(String nombre_Persona, String apellido_Persona, String email_Persona) {
         String Consulta = "insert into persona values (" + null + ", '" + nombre_Persona + "', '" + apellido_Persona + "', '" + email_Persona + "');";
+        
+        System.out.println(Consulta);
         if (conexion.insertarDatos(Consulta)) {
             conexion.desconectar();
             return true;
@@ -65,10 +67,24 @@ public class Daos_Persona {
 			persona.setId_Persona(rs.getInt(1));
 			persona.setEmail_Persona(rs.getString(2));
 			if (persona.getEmail_Persona().equals(emailPersona)) {
-				System.out.println(persona.getId_Persona());
+				
 				return persona.getId_Persona();
 			}
 		}
 		return -1;
+	}
+	
+	public Boolean validarEmail(String emailPersona) throws SQLException{
+		String consulta = "select email_persona from persona";
+		rs = conexion.seleccionarDatos(consulta);
+		System.out.println(consulta);
+		while (rs.next()) {
+			persona = new Persona();
+			persona.setEmail_Persona(rs.getString(1));
+			if (persona.getEmail_Persona().equals(emailPersona)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
