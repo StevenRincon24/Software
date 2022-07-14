@@ -54,7 +54,7 @@ body {
 	Daos_Usuario daosUsuario = new Daos_Usuario();
 	Rol rol = new Rol();
 	
-	ArrayList listarol = new ArrayList();
+	ArrayList<Rol> listarol = new ArrayList<Rol>();
 %>
 	<jsp:include page="../Menu/MenuAdministrador.jsp" />
 	<div class="album py-lg-5 ">
@@ -157,11 +157,11 @@ body {
 								class="form-select" name="rol" required>
 								<option value="" id="rol" name="rol">--Rol--</option>
 								<%
-								// Creamos un for para mostrar todos los programas
+								
 								listarol = daosUsuario.mostrarRol();
 								for (Object listar : listarol) {
 									rol = (Rol) listar;
-									//Tomamos cada uno de los valores que nos devuelve la base de datos de la tabla programa-->
+								
 									idRol = rol.getId_Rol();
 									nombreRol = rol.getNombre_Rol();
 

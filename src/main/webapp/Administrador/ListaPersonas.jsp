@@ -116,7 +116,7 @@ body {
 				</header>
 
 				<div class="container" style="margin-top: 10px; padding: 5px">
-					<table id="tablax" class="table table-striped table-bordered"
+					<table id="tablax" class="table table-striped "
 						style="width: 100%">
 
 

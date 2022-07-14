@@ -27,7 +27,7 @@ public class Conexion {
 			e.printStackTrace();
 
 		} catch (SQLException e) {
-			System.out.println("Error en la conexi�n");
+			System.out.println("Error en la conexión");
 			e.printStackTrace();
 		}
 

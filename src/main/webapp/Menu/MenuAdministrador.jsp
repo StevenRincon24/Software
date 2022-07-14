@@ -64,7 +64,7 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 <link href="../carousel/carousel.rtl.css" rel="stylesheet">
 <script>
 $(document).ready( function () {
-    $('#myTable').DataTable();
+    $('#myTable').Dat|aTable();
 } );
 </script> 
 </head>

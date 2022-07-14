@@ -126,7 +126,7 @@ body {
 								<th scope="col">Usuario</th>
 								<th scope="col">Rol</th>
 								<th scope="col">Nombres Usuario</th>
-								<th scope="col">Modifsaasicar</th>
+								<th scope="col">Modificar</th>
 
 							</tr>
 						</thead>
