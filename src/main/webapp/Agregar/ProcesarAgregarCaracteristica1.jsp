@@ -49,7 +49,7 @@
 		Swal.fire({
 			icon : 'error',
 			title : 'Error!!',
-			text : 'Ya se insertaron datos para el periodo seleccionado',
+			text : 'Ya se insertaron datos para el periodo seleccionado!!!',
 
 			showConfirmButton : true,
 
