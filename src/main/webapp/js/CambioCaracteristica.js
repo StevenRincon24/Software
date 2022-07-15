@@ -1,7 +1,5 @@
 function cambio() {
 	var caracteristica = document.getElementById("CaracteristicaSelccionada").value;
-
-	alert(caracteristica);
 	if (caracteristica == 1) {
 		document.getElementById("CaracteristicaMecanismosIngreso").setAttribute('style', " visibility: visible ");
 		document.getElementById("caracteristica2").setAttribute('style', " display: none ");

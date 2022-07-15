@@ -26,7 +26,7 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 <head>
 <meta charset="utf-8">
 
-<title>Lista Usuarios</title>
+<title>Aspectos evaluados mecanismos de ingres</title>
 <!-- Bootstrap core CSS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -37,12 +37,14 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
 
 <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<!-- BOOTSTRAP -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
 <link rel="stylesheet"
 	href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
@@ -55,16 +57,14 @@ body {
 </style>
 <body>
 
-	<%!int idRol;
-	String nombreRol, nombrePersona, apellidoPersona, emailPersona;
+	<%!double calificacionAspecto;
+	int idAspecto;
+	String nombreAspecto, conceptoAspecto, evidenciaAspecto;
 
-	Daos_Usuario daosUsuario = new Daos_Usuario();
-	Rol rol = new Rol();
-	Daos_Persona daosPersona = new Daos_Persona();
-	Usuario usuario = new Usuario();
+	Daos_AspectoEvaluado daos_AspectoEvaluado = new Daos_AspectoEvaluado();
+	Aspecto_Evaluado claseaspectoEvaluado = new Aspecto_Evaluado();
 
-	ArrayList<Rol> listarol = new ArrayList<Rol>();
-	ArrayList<Usuario> listausuarios = new ArrayList<Usuario>();%>
+	ArrayList<Aspecto_Evaluado> listaAspecto = new ArrayList<Aspecto_Evaluado>();%>
 	<jsp:include page="../Menu/MenuAdministrador.jsp" />
 	<div class="album py-lg-5 ">
 		<div class="container">
@@ -118,46 +118,52 @@ body {
 				</header>
 
 				<div class="container" style="margin-top: 10px; padding: 5px">
-					<table id="tablax" class="table table-striped table-bordered"
-						style="width: 100%">
+					<table id="tablax" class="table table-striped " style="width: 100%">
+
+
 						<thead>
 							<tr>
 
-								<th scope="col">Usuario</th>
-								<th scope="col">Rol</th>
-								<th scope="col">Nombres Usuario</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Concepto</th>
+								<th scope="col">Calificación</th>
+								<th scope="col">Evidencias</th>
 								<th scope="col">Modificar</th>
-
 							</tr>
 						</thead>
 						<tbody>
 
 							<%
-							listausuarios = daosUsuario.mostrarUsuarios();
-							for (int i = 0; i < listausuarios.size(); i++) {
-								usuario = (Usuario) listausuarios.get(i);
-								int id_usuario = usuario.getId_Usuario();
-								String nombre_Usuario = usuario.getNombre_Usuario();
-								String rol_persona = usuario.getRol();
-								String nombre = usuario.getNombre_Persona();
-								String apellido = usuario.getApellido_Persona();
-
+							listaAspecto = daos_AspectoEvaluado.listaAspectoEvaluado(1);
+							for(int i=0; i<listaAspecto.size();i++){
+								claseaspectoEvaluado = (Aspecto_Evaluado)listaAspecto.get(i);
+								nombreAspecto = claseaspectoEvaluado.getNombre_aspectoEvaluado();
+								conceptoAspecto = claseaspectoEvaluado.getConcepto_aspectoEvaluado();
+								calificacionAspecto = claseaspectoEvaluado.getCalificacion_aspectoEvaluado();
+								evidenciaAspecto = claseaspectoEvaluado.getEvidencia_aspectoEvaluado();
+								idAspecto = claseaspectoEvaluado.getId_Aspecto_Evaluado();
 								out.println("<tr>");
-								out.println("<td>" + nombre_Usuario);
-								out.println("<td>" + nombre + " " + apellido);
-								out.println("<td>" + rol_persona + "</td>");
-							%><td><a href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=id_usuario%>" <button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
+								out.println("<td>" + nombreAspecto);
+								out.println("<td>" + conceptoAspecto);
+								out.println("<td>" + calificacionAspecto);
+								out.println("<td>" + evidenciaAspecto + "</td>");
+							
+						
+
+							
+						%><td><a
+								href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=idAspecto	%>"
+								<button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
 							<%
-							out.println("</tr>");
-							}
-							%>
+						out.println("</tr>");
+						}
+						%>
 
 
 						</tbody>
+
 					</table>
-
 				</div>
-
 				<!-- JQUERY -->
 				<script src="https://code.jquery.com/jquery-3.4.1.js"
 					integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -212,6 +218,8 @@ body {
 														});
 									});
 				</script>
+
+
 			</div>
 		</div>
 	</div>

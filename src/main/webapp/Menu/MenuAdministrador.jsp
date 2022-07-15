@@ -34,9 +34,8 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 
 
 <!-- Bootstrap core CSS -->
-<link href="../assets/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
 
 
 <style>
@@ -58,15 +57,6 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 	text-align: center;
 }
 </style>
-
-
-<!-- Custom styles for this template -->
-<link href="../carousel/carousel.rtl.css" rel="stylesheet">
-<script>
-$(document).ready( function () {
-    $('#myTable').Dat|aTable();
-} );
-</script> 
 </head>
 <body>
 	<header>
@@ -84,9 +74,20 @@ $(document).ready( function () {
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<li class="nav-item"><a class="nav-link" aria-current="page"
 							href="../Administrador/PaginaPrincipal.jsp">Inicio</a></li>
-						<li class="nav-item"><a class="nav-link" aria-current="page"
-							href="../Administrador/Caracteristicas.jsp">Caracteristica</a></li>
-						<li class="nav-item"><a class="nav-link " href="../Administrador/Informes.jsp">Informe
+						<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="dropdown03"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							href="#">Caracteristica</a>
+							<ul class="dropdown-menu bg-dark" >
+
+								<li class="nav-item"><a class="nav-link" href="../Administrador/Caracteristicas.jsp">Mi
+										Añadir</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="../Listar/InformacionCaracteristicas.jsp">Detalle características</a></li>
+
+							</ul>
+							
+							</li>
+						<li class="nav-item "><a class="nav-link " href="../Administrador/Informes.jsp">Informe
 								y estadísticas</a></li>
 
 						<li class="nav-item"><a class="nav-link"
@@ -107,6 +108,9 @@ $(document).ready( function () {
 
 							</ul>
 						</li>
+						
+						
+						
 
 					</ul>
 

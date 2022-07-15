@@ -20,7 +20,7 @@ SessionActiva.invalidate();
 	<script type="text/javascript">
 	let timerInterval
 	Swal.fire({
-	  title: 'Cerrando sesiï¿½n!',
+	  title: 'Cerrando sesión!',
 	  html: 'Redireccionando al inicio.',
 	  timer: 1500,
 	  timerProgressBar: true,
