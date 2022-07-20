@@ -101,14 +101,13 @@ body {
 				<!-- FORM CHARACTERISTIC MECANISMOS DE INGRESO -->
 				<form class="needs-validation" novalidate
 					id="CaracteristicaMecanismosIngreso" method="post"
-					action="../Agregar/ProcesarAgregarCaracteristica1.jsp">
+					action="../Agregar/ProcesarAgregarCaracteristicaEstudiantes.jsp">
 					<div class="container">
 						<div class="row justify-content-center" style="margin-top: 30px">
 							<h3 style="align-items: center;">
 								<kbd>Característica: Mecanismos de ingreso</kbd>
 							</h3>
-							<br>
-							<br>
+							<br> <br>
 
 							<div class="col-12" style="align-content: center;">
 
@@ -126,8 +125,7 @@ body {
 
 
 							</div>
-							<br>
-							<br>
+							<br> <br>
 							<div class="col-4">
 								<label for="inputPeriodo" class="form-label">Periodo</label>
 								<div class="input-group mb-3">
@@ -257,7 +255,8 @@ body {
 						<br> <br> <label for="inputAnio" class="form-label">Observaciones</label>
 						<div class="form-floating">
 							<textarea class="form-control" placeholder="Leave a comment here"
-								id="observaciones" name="observacionesMecanismos" style="height: 100px"></textarea>
+								id="observaciones" name="observacionesMecanismos"
+								style="height: 100px"></textarea>
 							<label for="floatingTextarea2">Observaciones</label>
 						</div>
 
@@ -452,7 +451,7 @@ body {
 									<select class="form-select" aria-label="Seleccione" required
 										id="Periodo">
 
-										<option selected value="" name="periodo">Seleccione</option>
+										<option selected value="">Seleccione</option>
 										<%
 										listaperiodo = daosPeriodo.mostrarPeriodo();
 										for (Object lista : listaperiodo) {
@@ -470,37 +469,90 @@ body {
 							</div>
 
 							<div class="col-4">
-								<label for="inputInscritosCalidad" class="form-label">Inscritos</label>
+								<label for="inputInscritosCalidad" class="form-label">Cantidad
+									hombres</label>
 								<div class="input-group mb-3">
 									<input type="number" class="form-control" type="number"
 										placeholder="Número" aria-label="Numero"
-										aria-describedby="basic-addon1" value="" required="required">
+										aria-describedby="basic-addon1" value="" required="required"
+										id="hombres">
 									<div class="invalid-feedback">¡Debe escribir la cantidad
-										de estudiantes inscritos!</div>
+										de hombres desertores!</div>
+								</div>
+							</div>
+
+							<div class="col-4">
+								<label for="inputInscritosCalidad" class="form-label">Cantidad
+									mujeres</label>
+								<div class="input-group mb-3">
+									<input type="number" class="form-control" type="number"
+										placeholder="Número" aria-label="Numero"
+										aria-describedby="basic-addon1" value="" required="required"
+										id="mujeres">
+									<div class="invalid-feedback">¡Debe escribir la cantidad
+										de mujeres desertoras!</div>
 								</div>
 							</div>
 						</div>
 						<div class="row justify-content-center" style="margin-top: 30px">
 							<div class="col-4">
-								<label for="inputAdmitidosCalidad" class="form-label">Admitidos</label>
+								<label for="inputAdmitidosCalidad" class="form-label">Cantidad
+									matriculados</label>
 								<div class="input-group mb-3">
 									<input type="number" class="form-control" type="number"
 										placeholder="Número" aria-label="Numero"
-										aria-describedby="basic-addon1" value="" required="required">
-									<div class="invalid-feedback">¡Debe escribir la cantidad
-										de estudiantes admitidos!</div>
-								</div>
-							</div>
-							<div class="col-4">
-								<label for="inputMatriculadosCalidad" class="form-label">Matriculados</label>
-								<div class="input-group mb-3">
-									<input type="number" class="form-control" type="number"
-										placeholder="Número" aria-label="Numero"
-										aria-describedby="basic-addon1" value="" required="required">
+										aria-describedby="basic-addon1" value="" required="required"
+										id="matriculados" onchange="calcular()">
 									<div class="invalid-feedback">¡Debe escribir la cantidad
 										de estudiantes matriculados!</div>
 								</div>
 							</div>
+
+							<div class="col-4">
+								<label for="inputAdmitidosCalidad" class="form-label">Total
+									desertores</label>
+								<div class="input-group mb-3">
+									<input type="text" class="form-control" aria-label="Numero"
+										type="text" aria-describedby="basic-addon1" value=""
+										required="required" id="total" disabled="disabled">
+									<div class="invalid-feedback">¡Debe escribir la cantidad
+										de estudiantes matriculados!</div>
+								</div>
+							</div>
+
+							<div class="col-4">
+								<label for="inputMatriculadosCalidad" class="form-label">Tasaa
+									de deserción</label>
+								<div class="input-group mb-3">
+									<input class="form-control" type="text" placeholder="Número"
+										aria-label="Numero" aria-describedby="basic-addon1" value=""
+										required="required" id="tasa" disabled="disabled">
+									<div class="invalid-feedback">¡Debe escribir la tasa de
+										deserción!</div>
+								</div>
+							</div>
+
+							<script type="text/javascript">
+								function calcular() {
+									const hombres = document
+											.getElementById("hombres").value
+									const mujeres = document
+											.getElementById("mujeres").value
+									const tasa = document
+											.getElementById("tasa");
+									const total = document
+											.getElementById("total");
+									const matriculado = document
+											.getElementById("matriculados").value;
+									total.value = parseFloat(hombres)
+											+ parseFloat(mujeres);
+									const valor = document
+											.getElementById("total").value;
+									tasa.value = (((parseFloat(hombres) + parseFloat(mujeres)) * 100) / matriculado)
+											.toFixed(1);
+								}
+							</script>
+
 
 							<label for="inputAnio" class="form-label">Observaciones</label>
 							<div class="form-floating">

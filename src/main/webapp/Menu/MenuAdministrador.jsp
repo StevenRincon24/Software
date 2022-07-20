@@ -79,7 +79,7 @@ Usuario = (String) SessionActiva.getAttribute("Usuario");
 							href="#">Caracteristica</a>
 							<ul class="dropdown-menu bg-dark" >
 
-								<li class="nav-item"><a class="nav-link" href="../Administrador/Caracteristicas.jsp">Mi
+								<li class="nav-item"><a class="nav-link" href="../Administrador/Caracteristicas.jsp">
 										Añadir</a></li>
 								<li class="nav-item"><a class="nav-link"
 									href="../Listar/InformacionCaracteristicas.jsp">Detalle características</a></li>

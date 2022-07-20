@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Agregar caracteristica 3</h1>
+<h1>Ponderacion caracteristica </h1>
 </body>
 </html>

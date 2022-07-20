@@ -57,8 +57,7 @@ body {
 </style>
 <body>
 
-	<%!
-	int idCaracteristica, ponderacion;
+	<%!int idCaracteristica, ponderacion;
 	String nombreCaracteristica, nivelCaracteristica, gradoCaracteristica;
 	double calificacionCaracteristica;
 
@@ -81,6 +80,9 @@ body {
 				</nav>
 
 				<header class="py-3 mb-4 border-bottom">
+
+
+
 					
 				</header>
 
@@ -96,44 +98,61 @@ body {
 								<th scope="col">Nivel caracteristica</th>
 								<th scope="col">Calificacion caracteristica</th>
 								<th scope="col">Grado cumplimiento caracteristica</th>
-								<th scope="col">Modificar</th>
+								<th scope="col">Agregar ponderación</th>
 							</tr>
 						</thead>
 						<tbody>
 
 							<%
 							listaCaracteristica = daos_Caracterisitica.informacionMostrar();
-							for(int i=0; i<listaCaracteristica.size();i++){
-								claseCaracteristica = (Caracteristica)listaCaracteristica.get(i);
+							for (int i = 0; i < listaCaracteristica.size(); i++) {
+								claseCaracteristica = (Caracteristica) listaCaracteristica.get(i);
 								nombreCaracteristica = claseCaracteristica.getNombre_Caracteristica();
+								
 								ponderacion = claseCaracteristica.getPonderacion_Caracteristica();
 								nivelCaracteristica = claseCaracteristica.getNivel_Caracteristica();
 								calificacionCaracteristica = claseCaracteristica.getCalificacion_Caracteristica();
 								gradoCaracteristica = claseCaracteristica.getGrado_Cumplimiento_Caracteristica();
 								int idCaracteristica = claseCaracteristica.getId_caracteristica();
+								
+								if(nivelCaracteristica==null){
+									nivelCaracteristica="No asiganado";
+								}
+								if(gradoCaracteristica==null){
+									gradoCaracteristica="No asiganado";
+								}
+								
 								out.println("<tr>");
 								out.println("<td>" + nombreCaracteristica);
 								out.println("<td>" + ponderacion);
 								out.println("<td>" + nivelCaracteristica);
 								out.println("<td>" + calificacionCaracteristica);
 								out.println("<td>" + gradoCaracteristica + "</td>");
-							
-						
+							%>
 
-							
-						%><td><a
-								href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=idCaracteristica%>"
-								<button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
+							<td><a href="../Administrador/AgregarPonderacion.jsp?Id_Caracteristica=<%=idCaracteristica%>">
+							<button type='button' class='btn btn-outline-warning'
+									data-bs-toggle='modal' data-bs-target='#exampleModal'
+									data-bs-whatever='@mdo'>
+									<i class='fa fa-pencil-square-o'></i>
+								</button>
+							</a>
+
+								
+							</td>
 							<%
-						out.println("</tr>");
-						}
-						%>
+							out.println("</tr>");
+							}
+							%>
 
 
 						</tbody>
 
 					</table>
 				</div>
+				
+				
+				
 				<!-- JQUERY -->
 				<script src="https://code.jquery.com/jquery-3.4.1.js"
 					integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="

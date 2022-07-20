@@ -146,7 +146,7 @@ body {
 								out.println("<td>" + nombre_Usuario);
 								out.println("<td>" + nombre + " " + apellido);
 								out.println("<td>" + rol_persona + "</td>");
-							%><td><a href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=id_usuario%>" <button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
+							%><td><a href="Mostrar_Modificar_Actividad.jsp?Id_Persona=<%=id_usuario%>"> <button type='button' class='btn btn-outline-warning'><i class='fa fa-pencil-square-o'></i></button></a></td>
 							<%
 							out.println("</tr>");
 							}
