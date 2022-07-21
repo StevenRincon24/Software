@@ -40,4 +40,17 @@ public class Daos_AspectoEvaluado {
 			return null;
 		}
 	}
+	
+	public boolean agregarAspecto(String titulo, String concepto, String evidencia, double calificacion) {
+		String consulta="insert into aspectoevaluado values ( "+null+",'" + titulo + "','" + concepto + "'," + calificacion+ ", '"+evidencia+"', 3);";
+		System.out.println(consulta);
+		if (conexion.insertarDatos(consulta)) { 
+        	conexion.desconectar();
+            return true;
+        } else {
+        	conexion.desconectar();
+            return false;
+        }
+	}
+	
 }

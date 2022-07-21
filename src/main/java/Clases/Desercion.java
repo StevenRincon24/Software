@@ -10,6 +10,7 @@ public class Desercion {
 	private String periodoString;
 	private int caracteristica;
 	private String caracteristicaString;
+	private int cantidadMatriculados;
 	
 	public int getIdDesercion() {
 		return idDesercion;
@@ -64,6 +65,13 @@ public class Desercion {
 	}
 	public void setCaracteristicaString(String caracteristicaString) {
 		this.caracteristicaString = caracteristicaString;
+	}
+	
+	public int getCantidadMatriculados() {
+		return cantidadMatriculados;
+	}
+	public void setCantidadMatriculados(int cantidadMatriculados) {
+		this.cantidadMatriculados = cantidadMatriculados;
 	}
 	@Override
 	public String toString() {

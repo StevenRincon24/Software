@@ -45,18 +45,7 @@
 	} else if( daos_EstudiantesInscritos.agregarEstudiantes(aspirantesMecanismos, admitidosMecanismos,matriculadosMecanismos,
 			opcionalesMecanismos, opcionalesMatriculadosMecanismos,totalAdmitidosMecanismos, nuevosMatriculadosMecanismos, periodo) ){
 	%>
-	<script lang="javascript">
-		Swal.fire({
-			icon : 'error',
-			title : 'Error!!',
-			text : 'Ya se insertaron datos para el periodo seleccionado',
-
-			showConfirmButton : true,
-
-		}).then(function() {
-			location.href = "../Administrador/Caracteristicas.jsp";
-		});
-	</script>
+	
 	
 
 	<script lang="javascript">
@@ -69,15 +58,12 @@
 			timer : 1500,
 
 		}).then(function() {
-			location.href = "../Administrador/Caracterisitcas.jsp";
+			location.href = "../Administrador/Caracteristicas.jsp";
 		});
 	</script>
 	
 	<%
 	}
 	%>
-
-
-	
 </body>
 </html>

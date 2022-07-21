@@ -11,6 +11,10 @@ public class Estudiantes_Inscritos {
 	private String nombrePeriodo;
 	private int caracteristica_id_caracteristica;
 	private String nombreCaracterisitica;
+	private int cantidadMatriculados;
+	private int totalAdmitidos;
+	
+	
 	public int getIdestudiantesinscritos() {
 		return idestudiantesinscritos;
 	}
@@ -71,4 +75,19 @@ public class Estudiantes_Inscritos {
 	public void setNombreCaracterisitica(String nombreCaracterisitica) {
 		this.nombreCaracterisitica = nombreCaracterisitica;
 	}
+	public int getCantidadMatriculados() {
+		return cantidadMatriculados;
+	}
+	public void setCantidadMatriculados(int cantidadMatriculados) {
+		this.cantidadMatriculados = cantidadMatriculados;
+	}
+	public int getTotalAdmitidos() {
+		return totalAdmitidos;
+	}
+	public void setTotalAdmitidos(int totalAdmitidos) {
+		this.totalAdmitidos = totalAdmitidos;
+	}
+
+	
+	
 }
