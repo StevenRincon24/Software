@@ -9,9 +9,9 @@ import java.sql.Statement;
 public class Conexion {
 
 	private static final String CONTROLADOR = "com.mysql.cj.jdbc.Driver";
-	private static final String URL = "jdbc:mysql://localhost/proyectosoftware";
-	private static final String USUARIO = "root";
-	private static final String CLAVE = "1234";
+	private static final String URL = "jdbc:mysql://p1c3ml59vxf9syvx:r67masy8vmf4tdoo@bv2rebwf6zzsv341.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/sy99y9b7donmn2sp";
+	private static final String USUARIO = "p1c3ml59vxf9syvx";
+	private static final String CLAVE = "r67masy8vmf4tdoo";
 	private static Statement stmt;
 	private static ResultSet rs;
 	private static Connection con;
