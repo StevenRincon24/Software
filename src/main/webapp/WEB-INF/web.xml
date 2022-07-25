@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app id="WebApp_ID" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>	
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.4">
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>PdfGen</display-name>
+    <servlet-name>PdfGen</servlet-name>
+    <servlet-class>Clases.PdfGen</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PdfGen</servlet-name>
+    <url-pattern>/PdfGen</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>asd</display-name>
+    <servlet-name>asd</servlet-name>
+    <servlet-class>asd</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>asd</servlet-name>
+    <url-pattern>/asd</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>HttpServlet</display-name>
+    <servlet-name>HttpServlet</servlet-name>
+    <servlet-class>javax.servlet.http.HttpServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>HttpServlet</servlet-name>
+    <url-pattern>/HttpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>pdf</display-name>
+    <servlet-name>pdf</servlet-name>
+    <servlet-class>Conexion.pdf</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>pdf</servlet-name>
+    <url-pattern>/pdf</url-pattern>
+  </servlet-mapping>
 </web-app>
-
