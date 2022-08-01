@@ -113,7 +113,7 @@ h2 {
 					</select>
 				</div>
 			</div>
-			<div class="col-4">
+			<!--  <div class="col-4">
 				<label for="inputReporte" class="col-form-label">Reporte</label>
 				<div class="input-group mb-3">
 					<select class="form-select" aria-label="Seleccione">
@@ -122,7 +122,7 @@ h2 {
 						<option value="Estadisticas">Estadísticas</option>
 					</select>
 				</div>
-			</div>
+			</div>-->
 
 
 
@@ -176,6 +176,7 @@ h2 {
 				<div class="col-0">
 					<div class="d-grid gap-2 d-md-flex justify-content-md-center">
 						<button class="btn btn-warning" type="button">Exportar</button>
+						<!-- -->
 					</div>
 				</div>
 			</div>

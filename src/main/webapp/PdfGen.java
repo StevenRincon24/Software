@@ -22,12 +22,53 @@ import com.itextpdf.text.pdf.PdfWriter;
  */
 @WebServlet(urlPatterns = {"/PdfGen"})
 public class PdfGen extends HttpServlet {
-	//private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
        
- 
+	public PdfGen() {
+		
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/pdf");
+		OutputStream out = response.getOutputStream();
+		
+		try {
+			try {
+				Document documento = new Document();
+				PdfWriter.getInstance(documento, out);
+				
+				documento.open();
+				
+				Paragraph paraUno = new Paragraph();
+				Font fontTitulo = new Font(Font.FontFamily.HELVETICA,16,Font.BOLD, BaseColor.BLACK);
+				paraUno.add(new Phrase("Reporte", fontTitulo));
+				paraUno.setAlignment(Element.ALIGN_CENTER);
+				paraUno.add(new Phrase(Chunk.NEWLINE));
+				paraUno.add(new Phrase(Chunk.NEWLINE));
+				
+				documento.add(paraUno);
+				
+				Paragraph paraDos = new Paragraph();
+				Font fontDesc = new Font(Font.FontFamily.HELVETICA,12,Font.NORMAL, BaseColor.BLACK);
+				paraDos.add(new Phrase("Para encontrar a ", fontDesc));
+				paraDos.setAlignment(Element.ALIGN_JUSTIFIED);
+				paraDos.add(new Phrase(Chunk.NEWLINE));
+				paraDos.add(new Phrase(Chunk.NEWLINE));
+				
+				documento.add(paraDos);
+				
+				documento.close();
+				
+				
+			} catch (Exception e) {
+				e.getMessage();
+			}
+		} finally {
+			
+		}
+	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("application/pdf");

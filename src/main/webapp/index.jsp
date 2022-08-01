@@ -51,9 +51,12 @@
                                 <h3>Calidad de Estudiantes</h3>
                                 <small class="text-muted">Característica</small>
                                 <div class="card-body">
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>          
-                                   <!--  <button type="button" class="btn btn-secondary">Más información</button>-->
-                                   <button onclick="location.href='prueba.html'">Llévame a otro lado</button>
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <a href="Caracteristica4.pdf" download="Caracteristica4.pdf">
+         							<button type="button">Download</button> 
+         							</a> 
+                                          
+                                   
                                 </div>
                             </div>
                         </div>
