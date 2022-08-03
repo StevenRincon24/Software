@@ -1,5 +1,6 @@
 
 <%@page import="Daos.Daos_Desercion"%>
+<%@page import="Daos.Daos_EstudiantesInscritos"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Clases.Deserciones"%>
 
@@ -168,21 +169,12 @@ h2 {
 			<div id="cara1">
 			<div class="containerEstadistica">
 				<div class="container">
-					<h2>Deserciones</h2>
+					<h2>Aspirantes inscritos y aspirantes admitidos</h2>
 					<div>
 						<canvas id="myChart"></canvas>
 					</div>
 				</div>
 			</div>
-
-			<div class="container">
-				<div class="col-xs-12 text-center">
-					<h2>Perdida Cupo</h2>
-				</div>
-
-				<div id="donut-chart"></div>
-			</div>
-
 
 			<div class="containerInforme">
 				<div class="row justify-content-center" style="margin-top: 30px">
@@ -226,17 +218,28 @@ h2 {
 		
 	<%
 	
-		Daos_Desercion daosDesercion = new Daos_Desercion();
-		ArrayList cantidadHombres = daosDesercion.cantidadDesercionesHombres();
-		ArrayList cantidadMujeres = daosDesercion.cantidadDesercionesMujeres();
-		ArrayList label = daosDesercion.ArregloLabel2();
+		Daos_EstudiantesInscritos daosEstudiantesIns= new Daos_EstudiantesInscritos();
+		ArrayList cantidadAspirantes = daosEstudiantesIns.cantidadAspirantes();
+		ArrayList cantidadAdmitidos = daosEstudiantesIns.cantidadAdmitidos();
+		ArrayList cantidadMatriculados = daosEstudiantesIns.cantidadMatriculados();
+		ArrayList cantidadOpcionales = daosEstudiantesIns.cantidadOpcionales();
+		ArrayList cantidadOpcionales2 = daosEstudiantesIns.cantidadOpcionales2();
+		
+		ArrayList cantidadTotal = daosEstudiantesIns.cantidadTotal();
+		ArrayList cantidadNuevosMat = daosEstudiantesIns.cantidadNuevosMat();
+		ArrayList label = daosEstudiantesIns.ArregloLabel();
 				
 	%>
 
 	<script lang="javascript">
-		datosHombres = <%=cantidadHombres%>;
-		datosMujeres = <%=cantidadMujeres%>;
-		datosTotal = datosHombres.map( (item, ix) => item + datosMujeres[ix] );
+		datosAspirantes = <%=cantidadAspirantes%>;
+		datosAdmitidos = <%=cantidadAdmitidos%>;
+		datosMatriculados = <%=cantidadMatriculados%>;
+		datosOpcionales = <%=cantidadOpcionales%>;
+		datosOpcionales2 = <%=cantidadOpcionales2%>;
+		datosTotal = <%=cantidadTotal%>;
+		datosNuevosMat = <%=cantidadNuevosMat%>;
+		
 		label = <%=label%>
 		
 		console.log(datosTotal + " Prueba");
@@ -248,45 +251,41 @@ h2 {
 			data : {
 				labels : label,
 				datasets : [ {
-					label : "Hombres",
-					data : datosHombres,
+					label : "Aspirantes",
+					data : datosAspirantes,
 					backgroundColor : "rgba(1,52,240,94)",
 				}, {
-					label : "Mujeres",
-					data : datosMujeres,
+					label : "Admitidos",
+					data : datosAdmitidos,
 					backgroundColor : "rgba(91,240,103,94)",
 				}, {
-					label : "Total",
-					data : datosTotal,
+					label : "Matriculados",
+					data : datosMatriculados,
 					backgroundColor : "rgba(240, 226, 58, 94)",
+				}, {
+					label : "Opcionales",
+					data : datosOpcionales,
+					backgroundColor : "rgba(51, 255, 172, 94)",
+				}, {
+					label : "Opcionales Matriculados",
+					data : datosOpcionales2,
+					backgroundColor : "rgba(51, 230, 255, 94)",
+				}, {
+					label : "Total admitidos",
+					data : datosTotal,
+					backgroundColor : "rgba(131, 51, 255, 94)",
+				}, {
+					label : "Nuevos matriculados",
+					data : datosNuevosMat,
+					backgroundColor : "rgba(240, 51, 255, 94)",
 				},
+				
+				
 				],
 			},
 		});
 	</script>
 	
-	<script lang="javascript">
-		var chart = bb.generate({
-			data : {
-				columns : [ [ "Literal B", 9 ], [ "Literal C", 22 ],
-						[ "Literal D", 5 ], [ "Literal E", 8 ], ],
-				type : "donut",
-				onclick : function(d, i) {
-					console.log("onclick", d, i);
-				},
-				onover : function(d, i) {
-					console.log("onover", d, i);
-				},
-				onout : function(d, i) {
-					console.log("onout", d, i);
-				},
-			},
-			donut : {
-				title : "44",
-			},
-			bindto : "#donut-chart",
-		});
-	</script>
 	</div>
 			</form>
 
@@ -367,7 +366,7 @@ h2 {
 		Daos_Desercion daosDesercion2 = new Daos_Desercion();
 		ArrayList cantidadHombres2 = daosDesercion2.cantidadDesercionesHombres();
 		ArrayList cantidadMujeres2 = daosDesercion2.cantidadDesercionesMujeres();
-		ArrayList label2 = daosDesercion.ArregloLabel2();
+		ArrayList label2 = daosDesercion2.ArregloLabel2();
 				
 	%>
 
@@ -428,6 +427,554 @@ h2 {
 	</div>
 			</form>
 
+
+
+			<form class="needs-validation" novalidate id="Informe3" method="post">
+			<div class="container">
+                            <div class="col-xl-16">
+                                <div class="row justify-content-center" style="margin-top: 30px">
+                                    <h3 style="align-items: center;">
+                                        <kbd>Permanencia y deserción</kbd>
+                                    </h3>
+                                    <br> <br>
+                               </div>
+                            </div>
+            </div>
+			<div id="cara3">
+			<div class="containerEstadistica">
+				<div class="container">
+					<h2>Deserciones</h2>
+					<div>
+						<canvas id="myChart3"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="col-xs-12 text-center">
+					<h2>Perdida Cupo</h2>
+				</div>
+
+				<div id="donut-chart3"></div>
+			</div>
+
+
+			<div class="containerInforme">
+				<div class="row justify-content-center" style="margin-top: 30px">
+					<div class="col-6">
+						<label for="inputTipo" class="form-label">Concepto</label>
+						<textarea class="form-control"
+							placeholder="Escriba lo relacionado con el concepto"
+							id="TextareaLecturaConcepto" style="height: 200px" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+					</div>
+					<div class="col-6">
+						<label for="inputTipo" class="form-label">Evidencia</label>
+						<textarea class="form-control"
+							placeholder="Escriba lo relacionado con la evidencia"
+							id="TextareaLecturaEvidencia" style="height: 200px" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+					</div>
+				</div>
+				<div class="row justify-content-center" style="margin-top: 30px">
+					<div class="col-4">
+						<label for="inputCalificacion" class="form-label">Calificación</label>
+						<div class="input-group mb-3">
+							<input type="number" class="form-control" type="number"
+								placeholder="4.1" aria-label="Numero"
+								aria-describedby="basic-addon1" readonly>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row justify-content-center" style="margin-top: 10px">
+				<div class="col-0">
+					<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+					<a href="../GeneratePDF/Caracteristica6.pdf" download="Caracteristica6.pdf">
+         				<button class="btn btn-warning" type="button">Exportar Archivo</button> 
+         			</a> 
+					
+					
+					</div>
+				</div>
+			</div>
+		
+	<%
+	
+		Daos_Desercion daosDesercion3 = new Daos_Desercion();
+		ArrayList cantidadHombres3 = daosDesercion3.cantidadDesercionesHombres();
+		ArrayList cantidadMujeres3 = daosDesercion3.cantidadDesercionesMujeres();
+		ArrayList label3 = daosDesercion3.ArregloLabel2();
+				
+	%>
+
+	<script lang="javascript">
+		datosHombres = <%=cantidadHombres3%>;
+		datosMujeres = <%=cantidadMujeres3%>;
+		datosTotal = datosHombres.map( (item, ix) => item + datosMujeres[ix] );
+		label = <%=label3%>
+		
+		console.log(datosTotal + " Prueba");
+		
+		ctx = document.getElementById("myChart3").getContext("2d");
+		label = label;
+		 myChart = new Chart(ctx, {
+			type : "bar",
+			data : {
+				labels : label,
+				datasets : [ {
+					label : "Hombres",
+					data : datosHombres,
+					backgroundColor : "rgba(1,52,240,94)",
+				}, {
+					label : "Mujeres",
+					data : datosMujeres,
+					backgroundColor : "rgba(91,240,103,94)",
+				}, {
+					label : "Total",
+					data : datosTotal,
+					backgroundColor : "rgba(240, 226, 58, 94)",
+				},
+				],
+			},
+		});
+	</script>
+	
+	<script lang="javascript">
+		var chart = bb.generate({
+			data : {
+				columns : [ [ "Literal B", 9 ], [ "Literal C", 22 ],
+						[ "Literal D", 5 ], [ "Literal E", 8 ], ],
+				type : "donut",
+				onclick : function(d, i) {
+					console.log("onclick", d, i);
+				},
+				onover : function(d, i) {
+					console.log("onover", d, i);
+				},
+				onout : function(d, i) {
+					console.log("onout", d, i);
+				},
+			},
+			donut : {
+				title : "44",
+			},
+			bindto : "#donut-chart3",
+		});
+	</script>
+	</div>
+			</form>
+			
+
+			<form class="needs-validation" novalidate id="Informe4" method="post">
+			<div class="container">
+                            <div class="col-xl-16">
+                                <div class="row justify-content-center" style="margin-top: 30px">
+                                    <h3 style="align-items: center;">
+                                        <kbd>Participación actividades</kbd>
+                                    </h3>
+                                    <br> <br>
+                               </div>
+                            </div>
+            </div>
+			<div id="cara4">
+			<div class="containerEstadistica">
+				<div class="container">
+					<h2>Deserciones</h2>
+					<div>
+						<canvas id="myChart4"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="col-xs-12 text-center">
+					<h2>Perdida Cupo</h2>
+				</div>
+
+				<div id="donut-chart4"></div>
+			</div>
+
+
+			<div class="containerInforme">
+				<div class="row justify-content-center" style="margin-top: 30px">
+					<div class="col-6">
+						<label for="inputTipo" class="form-label">Concepto</label>
+						<textarea class="form-control"
+							placeholder="Escriba lo relacionado con el concepto"
+							id="TextareaLecturaConcepto" style="height: 200px" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+					</div>
+					<div class="col-6">
+						<label for="inputTipo" class="form-label">Evidencia</label>
+						<textarea class="form-control"
+							placeholder="Escriba lo relacionado con la evidencia"
+							id="TextareaLecturaEvidencia" style="height: 200px" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+					</div>
+				</div>
+				<div class="row justify-content-center" style="margin-top: 30px">
+					<div class="col-4">
+						<label for="inputCalificacion" class="form-label">Calificación</label>
+						<div class="input-group mb-3">
+							<input type="number" class="form-control" type="number"
+								placeholder="4.1" aria-label="Numero"
+								aria-describedby="basic-addon1" readonly>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row justify-content-center" style="margin-top: 10px">
+				<div class="col-0">
+					<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+					<a href="../GeneratePDF/Caracteristica7.pdf" download="Caracteristica7.pdf">
+         				<button class="btn btn-warning" type="button">Exportar Archivo</button> 
+         			</a> 
+					
+					
+					</div>
+				</div>
+			</div>
+		
+	<%
+	
+		Daos_Desercion daosDesercion4 = new Daos_Desercion();
+		ArrayList cantidadHombres4 = daosDesercion4.cantidadDesercionesHombres();
+		ArrayList cantidadMujeres4 = daosDesercion4.cantidadDesercionesMujeres();
+		ArrayList label4 = daosDesercion4.ArregloLabel2();
+				
+	%>
+
+	<script lang="javascript">
+		datosHombres = <%=cantidadHombres4%>;
+		datosMujeres = <%=cantidadMujeres4%>;
+		datosTotal = datosHombres.map( (item, ix) => item + datosMujeres[ix] );
+		label = <%=label4%>
+		
+		console.log(datosTotal + " Prueba");
+		
+		ctx = document.getElementById("myChart4").getContext("2d");
+		label = label;
+		 myChart = new Chart(ctx, {
+			type : "bar",
+			data : {
+				labels : label,
+				datasets : [ {
+					label : "Hombres",
+					data : datosHombres,
+					backgroundColor : "rgba(1,52,240,94)",
+				}, {
+					label : "Mujeres",
+					data : datosMujeres,
+					backgroundColor : "rgba(91,240,103,94)",
+				}, {
+					label : "Total",
+					data : datosTotal,
+					backgroundColor : "rgba(240, 226, 58, 94)",
+				},
+				],
+			},
+		});
+	</script>
+	
+	<script lang="javascript">
+		var chart = bb.generate({
+			data : {
+				columns : [ [ "Literal B", 9 ], [ "Literal C", 22 ],
+						[ "Literal D", 5 ], [ "Literal E", 8 ], ],
+				type : "donut",
+				onclick : function(d, i) {
+					console.log("onclick", d, i);
+				},
+				onover : function(d, i) {
+					console.log("onover", d, i);
+				},
+				onout : function(d, i) {
+					console.log("onout", d, i);
+				},
+			},
+			donut : {
+				title : "44",
+			},
+			bindto : "#donut-chart4",
+		});
+	</script>
+	</div>
+			</form>
+			
+			
+			<form class="needs-validation" novalidate id="Informe5" method="post">
+			<div class="container">
+                            <div class="col-xl-16">
+                                <div class="row justify-content-center" style="margin-top: 30px">
+                                    <h3 style="align-items: center;">
+                                        <kbd>Reglamento Estudiantil</kbd>
+                                    </h3>
+                                    <br> <br>
+                               </div>
+                            </div>
+            </div>
+			<div id="cara5">
+			<div class="containerEstadistica">
+				<div class="container">
+					<h2>Deserciones</h2>
+					<div>
+						<canvas id="myChart5"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="col-xs-12 text-center">
+					<h2>Perdida Cupo</h2>
+				</div>
+
+				<div id="donut-chart5"></div>
+			</div>
+
+
+			<div class="containerInforme">
+				<div class="row justify-content-center" style="margin-top: 30px">
+					<div class="col-6">
+						<label for="inputTipo" class="form-label">Concepto</label>
+						<textarea class="form-control"
+							placeholder="Escriba lo relacionado con el concepto"
+							id="TextareaLecturaConcepto" style="height: 200px" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+					</div>
+					<div class="col-6">
+						<label for="inputTipo" class="form-label">Evidencia</label>
+						<textarea class="form-control"
+							placeholder="Escriba lo relacionado con la evidencia"
+							id="TextareaLecturaEvidencia" style="height: 200px" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+					</div>
+				</div>
+				<div class="row justify-content-center" style="margin-top: 30px">
+					<div class="col-4">
+						<label for="inputCalificacion" class="form-label">Calificación</label>
+						<div class="input-group mb-3">
+							<input type="number" class="form-control" type="number"
+								placeholder="4.1" aria-label="Numero"
+								aria-describedby="basic-addon1" readonly>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row justify-content-center" style="margin-top: 10px">
+				<div class="col-0">
+					<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+					<a href="../GeneratePDF/Caracteristica8.pdf" download="Caracteristica8.pdf">
+         				<button class="btn btn-warning" type="button">Exportar Archivo</button> 
+         			</a> 
+					
+					
+					</div>
+				</div>
+			</div>
+		
+	<%
+	
+		Daos_Desercion daosDesercion5 = new Daos_Desercion();
+		ArrayList cantidadHombres5 = daosDesercion5.cantidadDesercionesHombres();
+		ArrayList cantidadMujeres5 = daosDesercion5.cantidadDesercionesMujeres();
+		ArrayList label5 = daosDesercion5.ArregloLabel2();
+				
+	%>
+
+	<script lang="javascript">
+		datosHombres = <%=cantidadHombres5%>;
+		datosMujeres = <%=cantidadMujeres5%>;
+		datosTotal = datosHombres.map( (item, ix) => item + datosMujeres[ix] );
+		label = <%=label5%>
+		
+		console.log(datosTotal + " Prueba");
+		
+		ctx = document.getElementById("myChart5").getContext("2d");
+		label = label;
+		 myChart = new Chart(ctx, {
+			type : "bar",
+			data : {
+				labels : label,
+				datasets : [ {
+					label : "Hombres",
+					data : datosHombres,
+					backgroundColor : "rgba(1,52,240,94)",
+				}, {
+					label : "Mujeres",
+					data : datosMujeres,
+					backgroundColor : "rgba(91,240,103,94)",
+				}, {
+					label : "Total",
+					data : datosTotal,
+					backgroundColor : "rgba(240, 226, 58, 94)",
+				},
+				],
+			},
+		});
+	</script>
+	
+	<script lang="javascript">
+		var chart = bb.generate({
+			data : {
+				columns : [ [ "Literal B", 9 ], [ "Literal C", 22 ],
+						[ "Literal D", 5 ], [ "Literal E", 8 ], ],
+				type : "donut",
+				onclick : function(d, i) {
+					console.log("onclick", d, i);
+				},
+				onover : function(d, i) {
+					console.log("onover", d, i);
+				},
+				onout : function(d, i) {
+					console.log("onout", d, i);
+				},
+			},
+			donut : {
+				title : "44",
+			},
+			bindto : "#donut-chart5",
+		});
+	</script>
+	</div>
+			</form>
+			
+			
+			<form class="needs-validation" novalidate id="Informe6" method="post">
+			<div class="container">
+                            <div class="col-xl-16">
+                                <div class="row justify-content-center" style="margin-top: 30px">
+                                    <h3 style="align-items: center;">
+                                        <kbd>Sistema evaluación estudiante</kbd>
+                                    </h3>
+                                    <br> <br>
+                               </div>
+                            </div>
+            </div>
+			<div id="cara6">
+			<div class="containerEstadistica">
+				<div class="container">
+					<h2>Deserciones</h2>
+					<div>
+						<canvas id="myChart6"></canvas>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="col-xs-12 text-center">
+					<h2>Perdida Cupo</h2>
+				</div>
+
+				<div id="donut-chart6"></div>
+			</div>
+
+
+			<div class="containerInforme">
+				<div class="row justify-content-center" style="margin-top: 30px">
+					<div class="col-6">
+						<label for="inputTipo" class="form-label">Concepto</label>
+						<textarea class="form-control"
+							placeholder="Escriba lo relacionado con el concepto"
+							id="TextareaLecturaConcepto" style="height: 200px" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+					</div>
+					<div class="col-6">
+						<label for="inputTipo" class="form-label">Evidencia</label>
+						<textarea class="form-control"
+							placeholder="Escriba lo relacionado con la evidencia"
+							id="TextareaLecturaEvidencia" style="height: 200px" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</textarea>
+					</div>
+				</div>
+				<div class="row justify-content-center" style="margin-top: 30px">
+					<div class="col-4">
+						<label for="inputCalificacion" class="form-label">Calificación</label>
+						<div class="input-group mb-3">
+							<input type="number" class="form-control" type="number"
+								placeholder="4.1" aria-label="Numero"
+								aria-describedby="basic-addon1" readonly>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="row justify-content-center" style="margin-top: 10px">
+				<div class="col-0">
+					<div class="d-grid gap-2 d-md-flex justify-content-md-center">
+					<a href="../GeneratePDF/Caracteristica9.pdf" download="Caracteristica9.pdf">
+         				<button class="btn btn-warning" type="button">Exportar Archivo</button> 
+         			</a> 
+					
+					
+					</div>
+				</div>
+			</div>
+		
+	<%
+	
+		Daos_Desercion daosDesercion6 = new Daos_Desercion();
+		ArrayList cantidadHombres6 = daosDesercion6.cantidadDesercionesHombres();
+		ArrayList cantidadMujeres6 = daosDesercion6.cantidadDesercionesMujeres();
+		ArrayList label6 = daosDesercion6.ArregloLabel2();
+				
+	%>
+
+	<script lang="javascript">
+		datosHombres = <%=cantidadHombres6%>;
+		datosMujeres = <%=cantidadMujeres6%>;
+		datosTotal = datosHombres.map( (item, ix) => item + datosMujeres[ix] );
+		label = <%=label6%>
+		
+		console.log(datosTotal + " Prueba");
+		
+		ctx = document.getElementById("myChart6").getContext("2d");
+		label = label;
+		 myChart = new Chart(ctx, {
+			type : "bar",
+			data : {
+				labels : label,
+				datasets : [ {
+					label : "Hombres",
+					data : datosHombres,
+					backgroundColor : "rgba(1,52,240,94)",
+				}, {
+					label : "Mujeres",
+					data : datosMujeres,
+					backgroundColor : "rgba(91,240,103,94)",
+				}, {
+					label : "Total",
+					data : datosTotal,
+					backgroundColor : "rgba(240, 226, 58, 94)",
+				},
+				],
+			},
+		});
+	</script>
+	
+	<script lang="javascript">
+		var chart = bb.generate({
+			data : {
+				columns : [ [ "Literal B", 9 ], [ "Literal C", 22 ],
+						[ "Literal D", 5 ], [ "Literal E", 8 ], ],
+				type : "donut",
+				onclick : function(d, i) {
+					console.log("onclick", d, i);
+				},
+				onover : function(d, i) {
+					console.log("onover", d, i);
+				},
+				onout : function(d, i) {
+					console.log("onout", d, i);
+				},
+			},
+			donut : {
+				title : "44",
+			},
+			bindto : "#donut-chart6",
+		});
+	</script>
+	</div>
+			</form>
 			
 
 
